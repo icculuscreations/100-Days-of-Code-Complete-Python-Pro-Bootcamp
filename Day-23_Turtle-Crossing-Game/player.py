@@ -1,9 +1,8 @@
 from turtle import Turtle
 
-
 STARTING_POSITION = (0, -280)
 MOVE_DISTANCE = 20
-FINISH_LINE_Y = 280
+FINISH_LINE_Y = 260
 
 
 class Player(Turtle):
@@ -12,16 +11,19 @@ class Player(Turtle):
         self.shape("turtle")
         self.color("SeaGreen3")
         self.penup()
+        self.go_to_start()
         self.setheading(90)
-        self.goto(STARTING_POSITION)
         self.at_finish_line = False
 
-# move turtle north when up key is pressed
     def move(self):
-        new_y = self.ycor() + MOVE_DISTANCE
-        self.goto(0, new_y)
-        if self.ycor() > FINISH_LINE_Y:
-            self.at_finish_line = True
+        self.forward(MOVE_DISTANCE)
 
-    def reset_turtle(self):
+    def is_at_finish_line(self):
+        if self.ycor() > FINISH_LINE_Y:
+            return True
+        else:
+            return False
+
+    def go_to_start(self):
         self.goto(STARTING_POSITION)
+
